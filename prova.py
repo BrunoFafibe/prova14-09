@@ -4,18 +4,18 @@ class Cadastro:
         self.cep = cep
         self.numeroResidencia = numeroResidencia
         self.pets = []
-        self.telefones = []
+        self.mensagens = []
 
-    def inserirTelefone(self, telefone):
-        self.telefones.append(telefone)
+    def inserirMensagem(self, telefone):
+        self.mensagens.append(telefone)
 
     def inserirPet(self, pet):
         self.pets.append(pet)
 
     def __str__(self):
-        out = f"{self.nome} possui {len(self.pets)} pets e mora no cep {self.cep} numero {self.numeroResidencia}\nContatos:\n"
-        for t in self.telefones:
-            out = out + str(t) + "\n"
+        out = f"{self.nome} possui {len(self.pets)} pets e mora no cep {self.cep} numero {self.numeroResidencia}\nMensagens:\n"
+        for m in self.mensagens:
+            out = out + str(m) + "\n"
         out = out + "Pets:\n"
         for p in self.pets:
             out = out + str(p) + "\n"
@@ -33,19 +33,17 @@ class Pet:
     def __str__(self):
         return f"{self.nome} é um {self.especie} ({self.raca}) de cor {self.cor} com {self.idade} anos"
 
-class TelefoneConta:
-    def __init__(self, numero, proprietario, celular=False, apenasEmergencias=False):
-        self.numero = numero
-        self.proprietario = proprietario
-        self.celular = celular
-        self.apenasEmergencias = apenasEmergencias
+class Mensagem:
+    def __init__(self, destino, texto, data):
+        self.texto = texto
+        self.destino = destino
+        self.data = data
 
     def __str__(self):
-        return f"{self.numero}, Apenas emergencias: {self.apenasEmergencias}"
+        return f"{self.data}: {self.texto}"
 
 
 bruno = Cadastro("Bruno", "000000", "1234")
 bruno.inserirPet(Pet("Terry", 5, "cão", "Cairn Terrier", "preto", bruno))
-bruno.inserirTelefone(TelefoneConta("1234-5678", bruno, True, False))
+bruno.inserirMensagem(Mensagem(bruno, "Agendamento confirmado", "10/06/19"))
 print(bruno)
-
